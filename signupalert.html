@@ -1,0 +1,118 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>System Security Alert</title>
+    <style>
+        body, html {
+            margin: 0;
+            padding: 0;
+            width: 100%;
+            height: 100%;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            overflow: hidden;
+            background-color: #000;
+        }
+
+        /* The Flashing Red Background Animation */
+        @keyframes flash-red {
+            0% { background-color: #7a0000; }
+            50% { background-color: #ff0000; }
+            100% { background-color: #7a0000; }
+        }
+
+        .overlay {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            /* Applying the animation */
+            animation: flash-red 0.5s infinite; 
+            z-index: 9999;
+        }
+
+        .alert-card {
+            background: white;
+            padding: 40px;
+            border-radius: 12px;
+            text-align: center;
+            box-shadow: 0 0 50px rgba(0,0,0,0.5);
+            max-width: 400px;
+        }
+
+        .icon-warning {
+            font-size: 80px;
+            margin-bottom: 10px;
+        }
+
+        h2 {
+            color: #d32f2f;
+            margin-bottom: 10px;
+            text-transform: uppercase;
+        }
+
+        p {
+            color: #333;
+            font-weight: bold;
+            line-height: 1.6;
+        }
+
+        .btn-primary {
+            background-color: #d32f2f;
+            color: white;
+            border: none;
+            padding: 15px 30px;
+            font-size: 18px;
+            border-radius: 5px;
+            cursor: pointer;
+            font-weight: bold;
+            margin-top: 20px;
+        }
+
+        .btn-primary:hover {
+            background-color: #b71c1c;
+        }
+    </style>
+</head>
+<body>
+
+    <div class="overlay" id="overlay" onclick="startAlert()">
+        <div class="alert-card">
+            <div class="alert-content">
+                <div class="icon-warning">⚠️</div>
+                <h2>Security Breach Detected</h2>
+                <p>System has detected a high-risk security threat. External access to your files and camera is active.</p>
+            </div>
+            <div class="btn-container">
+                <button class="btn btn-primary" onclick="resolveThreat()">Secure Device</button>
+            </div>
+        </div>
+    </div>
+
+    <!-- System Alert Audio (Looping) -->
+    <audio id="alertSound" src="Assets/pwlpl-tornado-warning-siren-sound-effect-359252.mp3" preload="auto" loop></audio>
+
+    <script>
+        // Function to start audio (Required for browser auto-play policies)
+        function startAlert() {
+            const audio = document.getElementById('alertSound');
+            audio.play().catch(error => {
+                console.log("Browser blocked autoplay. User must interact first.");
+            });
+        }
+
+        // Trigger on click anywhere or button press
+        window.addEventListener('click', startAlert);
+
+        function resolveThreat() {
+            alert("Attempting to neutralize threat... Please do not close your browser.");
+            // You can add more logic here
+        }
+    </script>
+</body>
+</html>
